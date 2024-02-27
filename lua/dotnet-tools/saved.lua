@@ -1,0 +1,39 @@
+            -- vim.schedule(function()
+            --     local result = {}
+            --     table.insert(result, "Result!")
+            --     -- local result = table.concat(j:result(), "Result!")
+            --     local width = vim.api.nvim_get_option("columns")
+            --     local height = vim.api.nvim_get_option("lines")
+            --
+            --     local win_width = math.floor(width * 0.8)
+            --     local win_height = math.floor(height * 0.8)
+            --
+            --     local row = math.floor(((height - win_height) / 2))
+            --     local col = math.floor((width - win_width) / 2)
+            --     print("width: " .. width)
+            --     print("height: " .. height)
+            --     print("win_width: " .. win_width)
+            --     print("win_height: " .. win_height)
+            --
+            --     -- local width = 30
+            --     -- local height = 20
+            --     Win_id = Popup.create(result, {
+            --         title = "Command Output",
+            --         highlight = "Normal",
+            --         line = row,
+            --         -- line = math.floor(((vim.o.lines - height) / 2) - 1),
+            --         -- col = math.floor((vim.o.columns - width) / 2),
+            --         -- minwidth = width,
+            --         -- minheight = height,
+            --         col = col,
+            --         minwidth = win_width,
+            --         minheight = win_height,
+            --         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' }
+            --     })
+            --     local bufnr = vim.api.nvim_win_get_buf(Win_id)
+            --     vim.api.nvim_buf_set_keymap(bufnr, "n", "q", "<cmd>lua CloseMenu()<CR>", { silent = false })
+            --     function CloseMenu()
+            --         vim.api.nvim_win_close(Win_id, true)
+            --     end
+            -- end)
+
