@@ -4,7 +4,7 @@ This plugin is a simple wrapper around the `dotnet` command line tool. It provid
 ## Installation
 This plugin requires the `dotnet` command line tool to be installed. You can install it from [here](https://dotnet.microsoft.com/download).
 
-You can install this plugin using LazyGit by running the following command:
+You can install this plugin using Lazy by running the following:
 
 ```lua
 return {
