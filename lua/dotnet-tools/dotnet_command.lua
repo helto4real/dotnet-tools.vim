@@ -10,7 +10,7 @@ function M.dotnet_test(opts)
         return
     end
     local path = vim.fn.expand(vim.fn.escape(opts.base_directory, '[]$'), true)
-    commands.run_dotnet_command({ "test", path, "--logger", "trx;logfilename=" .. parser.test_results_path })
+    commands.run_dotnet_command({ "test", path, "--logger", "trx;=LogFilePrefix=DT-", "--results-directory", parser.test_results_path })
 end
 
 -- Run dotnet build in a new Job and display the results in telescope

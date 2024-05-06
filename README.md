@@ -9,7 +9,7 @@ You can install this plugin using Lazy by running the following:
 ```lua
 return {
   'helto4real/dotnet-tools.nvim',
-  requires = { 'nvim-lua/plenary.nvim' }
+  requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
 }
 ```
 

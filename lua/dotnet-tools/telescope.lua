@@ -7,10 +7,11 @@ local ts_conf = require("telescope.config").values
 
 function M.show_results(title, test_results_table)
     local opts = {}
-    opts.bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-    opts.winnr = opts.winnr or vim.api.nvim_get_current_win()
+    -- opts.bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
+    -- opts.winnr = opts.winnr or vim.api.nvim_get_current_win()
+    -- opts.max_results = opts.max_results or 1000
     ts_pickers
-      .new({}, {
+      .new(opts, {
         prompt_title = title,
         finder = ts_finders.new_table {
           results = test_results_table,
