@@ -1,5 +1,8 @@
 # DotNet Tools plugin for NeoVim
 This plugin is a simple wrapper around the `dotnet` command line tool. It provides a few commands to make it easier to work with .NET projects in NeoVim.
+## Remarks
+This plugin is still in development and may not work as expected. Please report any issues you find.
+It is only currently tested on debian based linux distributions. It may not work on other operating systems for now.
 
 ## Installation
 This plugin requires the `dotnet` command line tool to be installed. You can install it from [here](https://dotnet.microsoft.com/download).
