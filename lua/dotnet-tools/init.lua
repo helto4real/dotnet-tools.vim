@@ -8,9 +8,14 @@ M.opts = {
     base_directory = './'
 }
 
+-- Use the hard coded path while testing
+-- M.opts = {
+--     base_directory = '/home/thhel/git/dotnet-test/'
+-- }
+
 function M.setup(opts)
     if opts.base_directory then
-        -- print("Setting base directory to " .. opts.base_directory)
+        print("Setting base directory to " .. opts.base_directory)
         M.opts.base_directory = opts.base_directory
     end
 end
