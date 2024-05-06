@@ -1,7 +1,7 @@
-local M = {}
-
 local print_result = require('dotnet-tools.print_result')
 local show_ts_results = require('dotnet-tools.telescope').show_results
+
+local M = {}
 
 local function get_random_folder_name()
     local timestamp = os.date("%Y%m%d%H%M%S")
@@ -13,7 +13,7 @@ M.test_results_path = get_random_folder_name()
 
 -- parses the test results and shows them in a telescope picker if there are test failures
 function M.parse_test_results()
-    local function get_trx_files(directory)
+    local function get_all_trx_files_from_directory(directory)
         local files = {}
         local p = io.popen('find "' .. directory .. '" -type f -name "*.trx"')
         if not p then
@@ -34,14 +34,6 @@ function M.parse_test_results()
         return str:sub(1, #start) == start
     end
 
-    local function trim_to_max_length(str, max_length)
-        if #str > max_length then
-            return string.sub(str, 1, max_length)
-        else
-            return str
-        end
-    end
-
     local function parse_trx_file(trx_file_path, test_results_table)
         local test_results = vim.fn.readfile(trx_file_path)
 
@@ -53,6 +45,8 @@ function M.parse_test_results()
         local currently_parsing_failed_test = false
         local current_failed_block_text = ""
 
+        -- Find the start of failing test, get the failing test block of information
+        -- and parse the file path, line number and error message
         for _, line in ipairs(test_results) do
             if currently_parsing_failed_test then
                 current_failed_block_text = current_failed_block_text .. line .. "\n"
@@ -82,14 +76,17 @@ function M.parse_test_results()
     end
 
     local test_results_table = {}
-    local trx_files = get_trx_files(M.test_results_path)
+    local trx_files = get_all_trx_files_from_directory(M.test_results_path)
     if not trx_files then
         print_result.print_error_result("Failed to find test results!")
         return
     end
+
     for _, file in ipairs(trx_files) do
         parse_trx_file(file, test_results_table)
     end
+
+    -- todo: get tmp directory from envorinment variable and use /tmp/ as default
     if string_starts_with(M.test_results_path, "/tmp/") then
         print("Removing temporary directory " .. M.test_results_path)
         -- just to be sure we don't delete anything important just in the temporary directory
@@ -99,6 +96,7 @@ function M.parse_test_results()
     show_ts_results('Dotnet test results', test_results_table)
 end
 
+-- parses the build results and shows them in a telescope picker if there are build failures
 function M.parse_build_results(build_results)
     local build_results_table = {}
     local currently_parsing_build_failures = false

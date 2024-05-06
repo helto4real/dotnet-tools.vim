@@ -1,7 +1,9 @@
-local M = {}
-vim.api.nvim_command('highlight DotNetTools_GreenText guifg=Green')
-
 local dt = require('dotnet-tools.dotnet_command')
+
+local M = {}
+
+-- Set the highlight for the green text
+vim.api.nvim_command('highlight DotNetTools_GreenText guifg=Green')
 
 -- Set default options values
 M.opts = {
@@ -29,7 +31,7 @@ function M.dotnet_build()
 end
 
 function M.dotnet_outdated(upgrade)
-    dt.dotnet_outdated(M.opts, upgrade)
+    dt.dotnet_tool_outdated(M.opts, upgrade)
 end
 
 -- testing purpose to clear the require cache

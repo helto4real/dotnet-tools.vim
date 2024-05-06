@@ -1,15 +1,13 @@
-
 local M = {}
+
 local ts_finders = require("telescope.finders")
 local ts_pickers = require("telescope.pickers")
 local ts_make_entry = require "telescope.make_entry"
 local ts_conf = require("telescope.config").values
 
+-- shows the results for buids and tests in a telescope picker
 function M.show_results(title, test_results_table)
     local opts = {}
-    -- opts.bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-    -- opts.winnr = opts.winnr or vim.api.nvim_get_current_win()
-    -- opts.max_results = opts.max_results or 1000
     ts_pickers
       .new(opts, {
         prompt_title = title,

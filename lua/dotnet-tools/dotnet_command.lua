@@ -23,7 +23,7 @@ function M.dotnet_build(opts)
     commands.run_dotnet_command({ "build", path })
 end
 
-function M.dotnet_outdated(opts, upgrade)
+function M.dotnet_tool_outdated(opts, upgrade)
     if commands.job_is_running then
         print "Already running an command, please wait for it to finish"
         return
@@ -36,5 +36,4 @@ function M.dotnet_outdated(opts, upgrade)
     end
 end
 
--- run dotnet command in a new Job
 return M;
