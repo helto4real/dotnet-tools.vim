@@ -7,7 +7,9 @@ local ts_conf = require("telescope.config").values
 
 -- shows the results for buids and tests in a telescope picker
 function M.show_results(title, test_results_table)
-    local opts = {}
+    local opts = {
+        path_display = { "tail" },
+    }
     ts_pickers
       .new(opts, {
         prompt_title = title,
