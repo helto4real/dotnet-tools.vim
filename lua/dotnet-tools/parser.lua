@@ -107,7 +107,6 @@ function M.parse_build_results(build_results)
             else
                 local file_path, line_nr, col, err_msg = string.match(line, "(.*)%((%d+),(%d+)%): (.*)%[")
                 if file_path and line_nr and col and err_msg then
-                    print(file_path)
                     table.insert(build_results_table,
                         {idx=i, file = file_path, pos = { tonumber(line_nr), tonumber(col) - 1 }, line = err_msg })
                 end
