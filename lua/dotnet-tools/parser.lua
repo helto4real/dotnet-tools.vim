@@ -1,5 +1,5 @@
 local print_result = require('dotnet-tools.print_result')
-local show_ts_results = require('dotnet-tools.telescope').show_results
+local show_ts_results = require('dotnet-tools.snacks').show_results
 
 local M = {}
 
@@ -47,7 +47,7 @@ function M.parse_test_results()
 
         -- Find the start of failing test, get the failing test block of information
         -- and parse the file path, line number and error message
-        for _, line in ipairs(test_results) do
+        for i, line in ipairs(test_results) do
             if currently_parsing_failed_test then
                 current_failed_block_text = current_failed_block_text .. line .. "\n"
                 local end_of_unit_test = string.match(line, "</UnitTestResult>")
@@ -58,7 +58,7 @@ function M.parse_test_results()
                         "<StackTrace>.* in (.*):line (%d+)")
                     if message and file_path and line_nr then
                         table.insert(test_results_table,
-                            { filename = file_path, lnum = tonumber(line_nr), col = 1, text = string.gsub(message, "\n", " ") })
+                            { idx=i, file = file_path, pos = { tonumber(line_nr), 1 }, line = string.gsub(message, "\n", " ") })
                     else
                         print_result.print_error_result('Failed to parse test result!')
                     end
@@ -100,15 +100,16 @@ end
 function M.parse_build_results(build_results)
     local build_results_table = {}
     local currently_parsing_build_failures = false
-    for _, line in ipairs(build_results) do
+    for i, line in ipairs(build_results) do
         if currently_parsing_build_failures then
             if string.match(line, "Error.s.$") then
                 currently_parsing_build_failures = false
             else
                 local file_path, line_nr, col, err_msg = string.match(line, "(.*)%((%d+),(%d+)%): (.*)%[")
                 if file_path and line_nr and col and err_msg then
+                    print(file_path)
                     table.insert(build_results_table,
-                        { filename = file_path, lnum = tonumber(line_nr), col = tonumber(col), text = err_msg })
+                        {idx=i, file = file_path, pos = { tonumber(line_nr), tonumber(col) - 1 }, line = err_msg })
                 end
             end
         else
@@ -117,7 +118,7 @@ function M.parse_build_results(build_results)
             end
         end
     end
-    show_ts_results('Dotnet test results', build_results_table)
+    show_ts_results('Dotnet build results', build_results_table)
 end
 
 return M
