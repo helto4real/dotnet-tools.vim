@@ -1,6 +1,10 @@
 ﻿namespace dotnet_tools;
 
-public class Class1
+public class TestClass
 {
+    static public string GetText()
+    {
+        return "Hello, World!";
+    }
 
 }
