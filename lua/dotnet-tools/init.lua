@@ -1,18 +1,18 @@
+local M = {}
 local dt = require('dotnet-tools.dotnet_command')
 
-local M = {
-    --- @class DotNetToolsOptions
-    --- @field base_directory string Base directory for the dotnet tools
-    config = {
+--- @class DotNetToolsOptions
+--- @field base_directory string Base directory for the dotnet tools
+--- @field highlight_group string Default highlight group for the plugin
+M.config = {
         base_directory = vim.fn.getcwd(),  -- Default to current working directory
         highlight_group = 'DotNetTools_GreenText'
-    }
 }
 
 -- Constants
 local HIGHLIGHT_DEFAULTS = {
-    guifg = 'Green',
-    ctermfg = 'Green'
+    fg = 'Green',
+    -- ctermfg = 'Green'
 }
 
 -- Private utility functions

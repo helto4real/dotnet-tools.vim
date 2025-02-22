@@ -1,10 +1,12 @@
 local M = {}
+
+
 -- Utility Functions
 
-function M.generate_temp_dir_name()
+function M.generate_temp_dir_name(tmp_dir_prefix)
     local timestamp = os.date("%Y%m%d%H%M%S")
     local random_number = math.random(1000, 9999)
-    return M.config.temp_dir_prefix .. timestamp .. "_" .. random_number
+    return tmp_dir_prefix .. timestamp .. "_" .. random_number
 end
 
 function M.find_trx_files(directory)

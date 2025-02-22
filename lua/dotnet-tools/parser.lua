@@ -81,7 +81,7 @@ function BuildParser.parse_build_results(build_results)
     return results
 end
 
-M.test_results_path = utils.generate_temp_dir_name()
+M.test_results_path = utils.generate_temp_dir_name(M.config.temp_dir_prefix)
 
 --- Parse test results from trx files
 function M.parse_test_results()

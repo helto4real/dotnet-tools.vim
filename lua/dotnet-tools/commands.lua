@@ -1,13 +1,13 @@
+local M = {}
+
 local Job = require 'plenary.job'
 local print_result = require('dotnet-tools.print_result')
 local parser = require('dotnet-tools.parser')
 
-local M = {
-    state = {
-        job_is_running = false,
-        term_win = -1,
-        term_buf = -1
-    }
+M.state = {
+    job_is_running = false,
+    term_win = -1,
+    term_buf = -1
 }
 
 -- Constants
@@ -18,7 +18,7 @@ local function handle_job_completion(args, job, return_val)
     vim.schedule(function()
         local command_name = args[1]
         if return_val == 0 then
-            print_result.print_success_result(string.format('dotnet %s ran successfully', command_name))
+            print_result.print_success_result(string.format('dotnet %s ran successfully!', command_name))
         else
             print_result.print_error_result(string.format('dotnet %s failed', command_name))
             M.handle_command_failure(command_name, job)
@@ -44,7 +44,7 @@ function M.run_dotnet_command(args)
     end
 
     M.state.job_is_running = true
-    print_result.print_msg(string.format('dotnet %s is running', args[1]))
+    print_result.print_msg(string.format('dotnet %s is running..', args[1]))
 
     local ok, job = pcall(Job.new, Job, {
         command = "dotnet",
